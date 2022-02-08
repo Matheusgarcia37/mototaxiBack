@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Profile_Cliente" ALTER COLUMN "createdAt" SET DEFAULT CURRENT_TIMESTAMP;
