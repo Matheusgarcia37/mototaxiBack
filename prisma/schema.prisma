@@ -11,12 +11,14 @@ datasource db {
 }
 
 model Profile_Cliente {
-  id        String   @id @default(uuid())
-  nome      String   @unique
-  telefone  String   @unique
-  foto      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String      @id @default(uuid())
+  nome         String      @unique
+  telefone     String      @unique
+  foto         String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  Aplicativo   Aplicativo? @relation(fields: [aplicativoId], references: [id])
+  aplicativoId String
 }
 
 model Profile_Motorista {
@@ -39,13 +41,32 @@ model Profile_Motorista {
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   user_MotoristaId String         @unique
+  Aplicativo       Aplicativo?    @relation(fields: [aplicativoId], references: [id])
+  aplicativoId     String
 }
 
 model User_Motorista {
-  id        String             @id @default(uuid())
-  login     String             @unique
-  senha     String
-  motorista Profile_Motorista?
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
+  id           String             @id @default(uuid())
+  login        String             @unique
+  senha        String
+  motorista    Profile_Motorista?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  aplicativo   Aplicativo         @relation(fields: [aplicativoId], references: [id])
+  aplicativoId String
+}
+
+model Aplicativo {
+  id                String              @id @default(uuid())
+  nome_app_c        String              @unique
+  nome_app_m        String              @unique
+  logo              String?
+  cor1              String
+  cor2              String?
+  cor3              String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  User_Motorista    User_Motorista[]
+  Profile_Motorista Profile_Motorista[]
+  Profile_cliente   Profile_Cliente[]
 }
