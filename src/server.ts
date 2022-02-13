@@ -1,5 +1,6 @@
 //create server express with socket io on port 3000
 import express from 'express';
+import routes from './routes';
 import cors from 'cors';
 import path from 'path';
 //import socketIO from 'socket.io';
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(routes);
 
 app.set('port', process.env.PORT || 3000);
 
@@ -16,10 +18,6 @@ let io = require('socket.io')(http, {
   cors: {
     origin: '*',
   }
-});
-
-app.get("/", (req: any, res: any) => {
-  res.sendFile(path.resolve("./client/index.html"));
 });
 
 // whenever a user connects on port 3000 via

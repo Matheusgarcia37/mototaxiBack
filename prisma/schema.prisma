@@ -12,7 +12,7 @@ datasource db {
 
 model Profile_Cliente {
   id           String      @id @default(uuid())
-  nome         String      @unique
+  nome         String      
   telefone     String      @unique
   foto         String?
   createdAt    DateTime    @default(now())
